@@ -4,10 +4,10 @@
          https://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.github.username</groupId>
+    <groupId>cl.ravenhill</groupId>
     <artifactId>echo-app-maven</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>echo-app-maven</name>
 
     <modules>
