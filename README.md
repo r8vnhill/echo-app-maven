@@ -1,70 +1,82 @@
 # echo-app-maven
 
-> A modular Java application managed with Apache Maven.
+This repository contains the source code for a modular Java project built with [Apache Maven](https://maven.apache.org/). It is designed to accompany **two lessons** from the [DIBS course](https://dibs.pages.dev), which walk you through the process of creating and scaling a Maven-based Java project.
 
-This repository accompanies **two lessons** from the [Software Library Design and Implementation](https://dibs.pages.dev) course:
+> ✍️ While both lessons are written in Spanish, the code in this repository is fully in **English** to ensure accessibility for a broader audience.
 
-- 📘 [Creating a Basic Project with Maven](https://dibs.pages.dev/docs/build-systems/init/maven/)
-- 📘 [Structuring a Multi-Module Project with Maven](https://dibs.pages.dev/docs/build-systems/basic-config/maven/)
+## 📚 Companion Lessons
 
-The goal is to provide a gradual, practical introduction to Maven, starting from project creation and culminating in a clean, modular multi-module build.
+- [✅ Creating a Basic Maven Project](https://dibs.pages.dev/docs/build-systems/init/maven/)  
+  Learn how to generate a simple Maven project using the `quickstart` archetype, define its metadata (`groupId`, `artifactId`, etc.), understand the default folder structure, and run your first Java app.
 
-## 📚 About the Lessons
-
-- The **first lesson** walks you through installing Maven, using an archetype to create a basic project, and running a simple "Hello, World!" Java app inspired by Pokémon.
-- The **second lesson** expands the project into a **multi-module build** using a parent POM and a [Bill of Materials (BOM)](https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#dependency-management) to centralize dependency versions.
-
-These lessons are written in Spanish, but the repository uses English for file and code names to maximize accessibility.
+- [🏗️ Modular Architecture with Maven and Java](https://dibs.pages.dev/docs/build-systems/modular-design/maven.mdx/)  
+  Take your project to the next level by transforming it into a multi-module setup with reusable components. You'll learn to separate responsibilities using a `lib` module and an `app` module, structure your POM files accordingly, and compile and run modular apps from the command line.
 
 ## 🧱 Project Structure
 
+This is a **multi-module Maven project** with two main modules:
+
+- **`lib`**: A library module that contains a simple utility method.
+- **`app`**: The main application that consumes the utility from `lib`.
+
 ```
 echo-app-maven/
-├── pom.xml            # Parent POM (build configuration and BOM)
-├── app/               # Main application logic
-│   └── pom.xml
-└── lib/               # Reusable library used by `app`
-    └── pom.xml
+├── pom.xml              # Root POM (parent)
+├── lib/
+│   ├── pom.xml          # Library module
+│   └── src/main/java/com/github/username/echo/EchoUtils.java
+├── app/
+│   ├── pom.xml          # Application module
+│   └── src/main/java/com/github/username/App.java
 ```
 
-- The root `pom.xml` serves as the **parent POM** and declares shared configuration for all modules.
-- Modules `app` and `lib` inherit from the parent and are built together.
-- A BOM is used to **centralize dependency versions**, so submodules only need to declare the dependencies they use, not their versions.
+## 🚀 Build & Run
 
-## 🚀 Getting Started
+### Prerequisites
 
-To build and run the project:
+- Java 8 or higher
+- Apache Maven 3.6 or later
+
+### Commands
+
+**Linux/macOS**
 
 ```bash
-mvn clean install
-mvn -pl app exec:java "-Dexec.mainClass=cl.ravenhill.App"
+mvn clean install && \
+mvn -pl app exec:java \
+  -Dexec.mainClass=com.github.username.App \
+  -Dexec.args="Ryugamine Celty Shizuo"
 ```
 
-Expected output:
+**Windows (PowerShell)**
 
-```plaintext
-Your journey as a Pokémon Trainer begins now.
-Choose wisely: Bulbasaur, Charmander, or Squirtle?
+```powershell
+mvn clean install && `
+mvn -pl app 'exec:java' `
+  '-Dexec.mainClass=com.github.username.App' `
+  '-Dexec.args=Ryugamine Celty Shizuo'
 ```
 
-## 🧪 Testing (Illustrative Only)
+## 💬 Output Example
 
-The `lib` and `app` modules don't include real test files, but the parent POM manages a dependency on JUnit:
+After a successful build, the output should include a lot of Maven logs followed by:
 
-```xml
-<dependency>
-  <groupId>org.junit.jupiter</groupId>
-  <artifactId>junit-jupiter-api</artifactId>
-</dependency>
+```
+Ryugamine
+Celty
+Shizuo
 ```
 
-This shows how **dependency versions are inherited** from the BOM and don't need to be repeated in each module.
+## 🎓 Topics Covered
 
-## 🛠 Requirements
+This repository demonstrates:
 
-- Java 17+ (configured for source/target level 23 if supported)
-- Maven 4.0+ (or Maven 3.9.9+ for compatibility)
+- Generating a basic Maven project using an archetype.
+- Understanding project metadata: `groupId`, `artifactId`, `version`, and `package`.
+- Creating a multi-module architecture with shared configuration.
+- Reusing logic across modules using Maven dependencies.
+- Running Java programs via `exec-maven-plugin`.
 
-## 📄 License
+## ⚖️ License
 
-This project is licensed under a BSD-style license. See the [LICENSE](./LICENSE) file for full terms.
+This project is licensed under the [BSD-2-Clause License](LICENSE). Feel free to use, modify, and distribute it as per the terms of the license.

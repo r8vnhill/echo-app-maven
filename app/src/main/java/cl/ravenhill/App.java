@@ -1,8 +1,24 @@
 package cl.ravenhill;
 
+import cl.ravenhill.echo.EchoUtils;
+
+/**
+ * Entry point for the application.
+ * <p>
+ * This class reads command-line arguments and echoes each one to the standard output using the 
+ * {@link EchoUtils#echoMessage(String)} method.
+ * </p>
+ */
 public class App {
+
+    /**
+     * Main method that processes input arguments.
+     *
+     * @param args An array of command-line arguments to echo.
+     */
     public static void main(String[] args) {
-        System.out.println("Your journey as a Pokémon Trainer begins now.");
-        System.out.println("Choose wisely: Bulbasaur, Charmander, or Squirtle?");
+        for (String arg : args) {
+            System.out.println(EchoUtils.echoMessage(arg));
+        }
     }
 }
